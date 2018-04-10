@@ -1,23 +1,63 @@
 # iZettle
-Plugin for Cordova
 
+Plugin for Cordova to use iZettle SDK in iOS
 
-Until I get the time, this is the quick install
+You will need an API key issued by iZettle in order to use this plugin
 
-1. Add platform ios
-2. Build ios
-3. Follow the instructions on https://github.com/iZettle/sdk-ios
-4. add plugin
-5. Ready
+To Install:
 
-#Functions
+1. Follow https://github.com/iZettle/sdk-ios, recommend using CocoaPods to install iZettleSDK in ios directory in your Cordova project and then configuring bluetooth and location capabilities in xCode.
 
-##Charge
-Perform a payment with an amount and a reference.
+2. Add Plugin using cordova plugin add
+
+# Setup your API key
+
+To begin using iZettle SDK run:
+
+	iZettle.startiZettleSDK('IZETTLE-API-KEY-GOES-HERE');
 	
-	chargeAmount( apiKey, amount, currency, reference );
+**Only load this into your application once.**
 
-- **apiKey**: The API key from iZettle
-- **amount**: The amount to be charged in the logged in users currency.
-- **currency**: Only used for validation. If the value of this parameter doesn't match the users currency the user will be notified and then logged out. For a complete list of valid currency codes, see [ISO 4217](http://www.xe.com/iso4217.php)
-- **reference**: The payment reference. Used to identify an iZettle payment, used when retrieving payment information at a later time or performing a refund. Max length 128.
+# Enforce user account
+
+To force useage of a sepcific iZettle account:
+
+	iZettle.enforcedUserAccount(iZettle-Account-Email);
+
+# Charge Amount
+
+To charge an amount through the iZettle reader:
+
+	iZettle.chargeAmount(Amount, "Currency Code", Reference, transactionSuccessful, transactionFailed);
+
+- **Amount**: The amount to be charged in the logged in users currency
+- **Currency Code (Optional)**: Only used for validation. If the value of this parameter doesn't match the users currency the user will be notified and then logged out. For a complete list of valid currency codes, see [ISO 4217](http://www.xe.com/iso4217.php)
+- **Reference**: The payment reference. Used to identify an iZettle payment, used when retrieving payment information at a later time or performing a refund. Max length 128.
+- **transactionSuccessful**: Callback to be fired on transaction succeding
+- **transactionFailed**: Callback to be fired on transaction failing
+
+transactionSuccessful returns iZettlePaymentInfo object as seen in iZettle SDK documentation.
+
+# Refund Amount
+
+To refund an amount through the iZettle reader:
+
+	iZettle.refundAmount(Amount, Reference, Refund Reference, transactionSuccessful, transactionFailed);
+
+- **Amount**: The amount to be charged in the logged in users currency
+- **Reference**: The reference of the original payment used when chargeAmount was called.
+- **Refund Reference**: The refund reference. Used to identify an iZettle payment, used when retrieving payment information at a later time or performing a refund. Max length 128.
+- **transactionSuccessful**: Callback to be fired on transaction succeding
+- **transactionFailed**: Callback to be fired on transaction failing
+
+# Presenting Settings
+
+Present iZettle settings view. The user can switch account, access the iZettle FAQ, view card reader settings etc.
+
+	iZettle.presentSettingsFromViewController();
+	
+# Abort Operation
+
+Attempt aborting the ongoing operation. Only use this if absolutely necessary. The state of the payment will be unknown to the user after this call.
+
+	iZettle.abortOperation();

@@ -1,19 +1,25 @@
 /*global cordova, module*/
 
 module.exports = {
-    chargeAmount: function (successCallback, errorCallback, api, amount, currency, reference) {
-        cordova.exec(successCallback, errorCallback, "iZettle", "chargeAmount", [api, amount, currency, reference]);
+    startiZettleSDK: function (apiKey) {
+        cordova.exec(null, null, "iZettle", "startiZettleSDK", [apiKey]);
     },
-    settings: function (api) {
-	    cordova.exec(function(){}, function(){}, "iZettle", "settings", [api]);
+    enforcedUserAccount: function (userAccount) {
+        cordova.exec(null, null, "iZettle", "enforcedUserAccount", [userAccount]);
     },
-    retrievePaymentInfoForReference: function(successCallback, errorCallback, api, rPIFR) {
-	   cordova.exec(successCallback, errorCallback, "iZettle", "retrievePaymentInfoForReference", [api, rPIFR]); 
+    chargeAmount: function (amount, currency, reference, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "iZettle", "chargeAmount", [amount, currency, reference]);
     },
-    refundPaymentWithReference: unction(successCallback, errorCallback, api, refundPaymentWithReferenceID, refundReference) {
-    	cordova.exec(successCallback, errorCallback, "iZettle", "refundPaymentWithReference", [api, refundPaymentWithReferenceID, refundReference]);
+    refundAmount: function (amount, reference, refundreference, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "iZettle", "refundAmount", [amount, reference, refundreference]);
     },
-    abortOperation: function(api) {
-	 	cordova.exec(function(){}, function(){}, "iZettle", "abortOperation", [api]);  
+    retrievePaymentInfoForReference: function (reference, successCallback) {
+        cordova.exec(successCallback, null, "iZettle", "retrievePaymentInfoForReference", [reference]);
+    },
+    presentSettingsFromViewController: function () {
+        cordova.exec(null, null, "iZettle", "presentSettingsFromViewController");
+    },
+    abortOperation: function() {
+	 	cordova.exec(null, null, "iZettle", "abortOperation");  
     }
 };

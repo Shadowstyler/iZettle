@@ -2,7 +2,6 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         id="dk.sugee.iZettle"
         version="0.7.0">
-
   <name>iZettle</name>
 
   <engines>
