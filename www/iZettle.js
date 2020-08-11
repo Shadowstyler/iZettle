@@ -7,8 +7,8 @@ module.exports = {
     enforcedUserAccount: function (userAccount) {
         cordova.exec(null, null, "iZettle", "enforcedUserAccount", [userAccount]);
     },
-    chargeAmount: function (amount, currency, reference, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "iZettle", "chargeAmount", [amount, currency, reference]);
+    chargeAmount: function (amount, enableTipping, reference, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "iZettle", "chargeAmount", [amount, enableTipping, reference]);
     },
     refundAmount: function (amount, reference, refundreference, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "iZettle", "refundAmount", [amount, reference, refundreference]);
