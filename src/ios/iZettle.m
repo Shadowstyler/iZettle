@@ -25,9 +25,10 @@
 
 - (void) chargeAmount:(CDVInvokedUrlCommand *)command {
     NSDecimalNumber* amount = [NSDecimalNumber decimalNumberWithString:[command.arguments objectAtIndex:0]];
-    NSString* currency = [command.arguments objectAtIndex:1];
+    //NSNumber* enableTipping = [NSNumber numberWithBool:[command.arguments objectAtIndex:1]];
+    Boolean* enableTipping = false;
     NSString* reference = [command.arguments objectAtIndex:2];
-    [[iZettleSDK shared] chargeAmount:amount currency:currency reference:reference presentFromViewController:self.viewController completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
+    [[iZettleSDK shared] chargeAmount:amount enableTipping:enableTipping reference:reference presentFromViewController:self.viewController completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
         if (paymentInfo != nil) {
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:[self convertPaymentInfo: paymentInfo]];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
