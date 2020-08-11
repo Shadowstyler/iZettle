@@ -1,6 +1,6 @@
 # iZettle
 
-Plugin for Cordova to use iZettle SDK in iOS
+Plugin for Cordova to use iZettle SDK in iOS (sdk < 3.0 && > 2.05)
 
 You will need an API key issued by iZettle in order to use this plugin
 
@@ -28,10 +28,10 @@ To force useage of a sepcific iZettle account:
 
 To charge an amount through the iZettle reader:
 
-	iZettle.chargeAmount(Amount, "Currency Code", Reference, transactionSuccessful, transactionFailed);
+	iZettle.chargeAmount(Amount, enableTipping, Reference, transactionSuccessful, transactionFailed);
 
 - **Amount**: The amount to be charged in the logged in users currency
-- **Currency Code (Optional)**: Only used for validation. If the value of this parameter doesn't match the users currency the user will be notified and then logged out. For a complete list of valid currency codes, see [ISO 4217](http://www.xe.com/iso4217.php)
+- **enableTipping**: defunc
 - **Reference**: The payment reference. Used to identify an iZettle payment, used when retrieving payment information at a later time or performing a refund. Max length 128.
 - **transactionSuccessful**: Callback to be fired on transaction succeding
 - **transactionFailed**: Callback to be fired on transaction failing
